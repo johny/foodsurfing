@@ -1,0 +1,13 @@
+%div.page-header
+  %h1 Edycja
+
+
+%div.page-content
+
+  = form_for @meal, html: {multipart: true } do |f|
+
+    %fieldset
+      = render partial: 'fields', locals: {f: f}
+
+    %fieldset.actions
+      = f.submit "Dodaj posiłek", class: "btn btn-primary btn-large"

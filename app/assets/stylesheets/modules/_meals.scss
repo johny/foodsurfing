@@ -1,0 +1,25 @@
+.media-meal{
+  position: relative;
+
+  .actions{
+    position: absolute;
+    right: 10px;
+    top: 0px;
+  }
+}
+
+
+.meal-photo{
+  padding: 10px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+
+.meal-sharing{
+  margin-top: 30px;
+}
+
+.meal-participants{
+  clear: both;
+  padding: 5px;
+}

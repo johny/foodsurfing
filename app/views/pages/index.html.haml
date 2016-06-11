@@ -1,0 +1,55 @@
+- content_for :map do
+  %div.map-wrapper
+    %div#map
+
+    %ul.filters
+      - ['ekologiczne', 'bezglutenowe', 'wegetariańskie', 'wypieki', 'tradycyjne', 'lekkostrawne'].each do |cat|
+        %li
+          = link_to "#" do
+            %span.fa.fa-check
+            = cat
+
+    :javascript
+      Meals = #{@meals_json}
+
+- content_for :fullpage_before do
+  .jumbotron
+    %div.container
+      %h1
+        Dobre, smaczne i tanie jedzenie w&nbsp;doborowym towarzystwie
+      %p.lead
+        Przez FoodSurfing znajdziesz ludzi, z którymi zjesz coś fajnego, tanio i dobrze.
+
+
+
+%div.row
+
+  %div.col-md-6
+
+    %div.panel.panel-default
+      %div.panel-heading
+        %h3.panel-title Wybrane posiłki
+
+      %div.panel-body
+        = render partial: 'meals/list', locals: {meals: @special}
+
+  %div.col-md-6
+
+    %div.panel.panel-default
+      %div.panel-heading
+        %h3.panel-title Ostatnio dodane
+
+      %div.panel-body
+        = render partial: 'meals/list', locals: {meals: @latest}
+
+
+- content_for :fullpage_after do
+  .special
+    %div.container
+      %h1
+        Dziel się żywnością i posiłkami
+      %p.lead
+        Poznaj wspaniałych ludzi, oszczędzaj zasoby i jedz dobrze
+
+
+  = render partials: 'pages/landing_modal'

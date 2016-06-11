@@ -1,0 +1,96 @@
+%div.page-header
+  %h1= @meal.name
+
+  %button.btn.btn-primary.js-button-share{data: {uri: meal_url(@meal)}}
+    %i.fa.fa-facebook-square
+    Podziel się ze znajomymi
+
+%div.page-content
+  %div.row
+    %div.col-md-6
+      - if @meal.picture
+        %div.meal-photo.fluid-image
+          = image_tag @meal.picture.url(:medium)
+    %div.col-md-6
+      = simple_format @meal.description
+
+      %dl.dl-horizontal
+        %dt Ilość porcji:
+        %dd= @meal.portions
+
+        %dt Cena za porcję:
+        %dd== #{@meal.price_per_portion} PLN
+
+        %dt Propozycja ważna do:
+        %dd== #{I18n.l(@meal.served_at, format: :short)}
+
+      - if @meal.participants.include?(current_user)
+        %div.alert.alert-info
+          %strong Jesteś na liście uczestników.
+      - elsif user_signed_in? && current_user.can_order?(@meal)
+        = link_to new_meal_meal_share_path(@meal), class: "btn btn-primary" do
+          %i.fa.fa-pie-chart
+          Chcę zamówić porcję
+      - else
+        - if @meal.shares_left?
+          = link_to new_meal_meal_share_path(@meal), class: "btn btn-primary" do
+            %i.fa.fa-pie-chart
+            Chcę zamówić porcję
+
+
+
+  - if @meal.meal_shares.size > 0
+    .panel.panel-default.meal-sharing
+      .panel-heading
+        %h3.panel-title Już zamówili
+      .panel-body
+        - @meal.meal_shares.each do |share|
+          %div.profile-item
+            = image_tag share.user.avatar.url(:thumb), class: "rounded"
+            %span.name
+              = share.user.name
+              = "x #{share.ordered_portions}"
+            - if share.user == current_user
+              = link_to quit_meal_meal_shares_path(@meal), class: 'btn btn-default', method: :delete do
+                Wypisz się z listy
+
+
+
+- content_for :sidebar do
+
+  %div.sidebar
+    %div.panel.panel-default
+      %div.panel-heading
+        %h3.panel-title Lokalizacja
+      %div.panel-body
+        %div#markermap
+        :javascript
+          MealMarker = #{@meal.to_marker_json}
+
+
+    %div.panel.panel-default
+      %div.panel-heading
+        %h3.panel-title Przygotowuje
+
+      %div.panel-body
+        %h4= @meal.user.name
+
+        - if @meal.user.avatar
+          %div.profile-avatar.small-avatar
+            = image_tag @meal.user.avatar.url(:medium)
+        = simple_format @meal.user.bio
+
+
+- content_for :head do
+  = render partial: 'layouts/shared/fb_init'
+
+- content_for :og do
+  %meta{property: "og:title", content: "#{raw @meal.name} - FoodSurfing.pl"}
+  %meta{property: "og:description", content: truncate(@meal.description, length: 128)}
+  %meta{property: "og:url", content: meal_url(@meal)}
+  %meta{property: "og:site_name", content: "FoodSurfing.pl"}
+  %meta{property: "og:type", content: "foodsurfing:meal"}
+  - if @meal.picture.present?
+    %meta{property: "og:image", content: image_url(@meal.picture.url(:medium))}
+  - else
+    %meta{property: "og:image", content: asset_url('fb.png')}

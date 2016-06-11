@@ -1,0 +1,37 @@
+.page-container{
+  min-height: 480px;
+}
+
+
+.page-header{
+  position: relative;
+
+  .btn{
+    position: absolute;
+    right: 0;
+    top: 5px;
+  }
+}
+
+.jumbotron{
+  text-align: center;
+  padding: 50px 0 50px 0;
+}
+
+.special{
+  background: url(asset_path('bg.jpg')) 0 0 no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  margin:0 0 20px 0;
+
+  .text-center{
+    background: rgba(0,0,0,0.5);
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  }
+}

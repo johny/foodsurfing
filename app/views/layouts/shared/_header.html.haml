@@ -1,0 +1,36 @@
+.navbar.navbar-default.navbar-inverse.navbar-static-top{:role => "navigation"}
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to "FoodSurfing.pl", root_path, class: "navbar-brand brand-logo"
+    .navbar-collapse.collapse
+      %ul.nav.navbar-nav
+        %li
+          = link_to about_path do
+            %i.fa.fa-question
+            Jak to działa
+        %li
+          = link_to new_meal_path do
+            %i.fa.fa-pie-chart
+            Udostępnij posiłek
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %p.navbar-text
+            == Witaj #{current_user.name}!
+          %li
+            = link_to dashboard_path do
+              %i.fa.fa-dashboard
+              Twoje konto
+          %li
+            = link_to destroy_user_session_path, :method => :delete do
+              %i.fa.fa-sign-out
+              Wyloguj się
+        - else
+          %li
+            = link_to new_user_session_path do
+              %i.fa.fa-sign-in
+              Zaloguj się

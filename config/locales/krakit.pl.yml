@@ -1,0 +1,10 @@
+pl:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "Adres email jest już zajęty."
+              blank: "Pole nie może być puste."
+              not_found: "Adres email nie istnieje w bazie danych."

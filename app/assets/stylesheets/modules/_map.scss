@@ -1,0 +1,52 @@
+#map{
+  height: 520px;
+  background: #eee;
+}
+
+.map-wrapper{
+  margin-bottom: 0px;
+  position: relative;
+}
+
+#minimap{
+  height: 200px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+
+#markermap{
+  height: 200px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+
+.filters{
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  margin: 0;
+  right: 0;
+  text-align: center;
+  //background: rgba(0,0,0,0.2);
+  background: #16a085;
+  padding: 5px 0px;
+
+  li{
+    display: inline-block;
+  }
+
+  a{
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.7);
+    color: #666;
+
+    &.active{
+      color: $brand-primary;
+      background: #fff;
+    }
+  }
+}

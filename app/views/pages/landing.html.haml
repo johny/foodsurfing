@@ -1,0 +1,18 @@
+%div.jumbotron
+
+  %p
+    Na <a href="https://www.facebook.com/hack4goodKrK">#hack4good 0.6 w Krakowie</a> stworzyliśmy projekt aplikacji umożliwiającej dzielenie się jedzeniem.<br/>
+    Teraz prosimy o odrobinę cierpliwości, żebyśmy mogli poprawić błędy i dodać kilka istotnych ficzerów.
+  = render partial: 'pages/mailchimp'
+
+%p.text-center
+  Napisz do nas / get in touch at
+  =mail_to 'foodsurfing.pl@gmail.com'
+
+- content_for :fullpage_before do
+  .special
+    %div.text-center
+      %h1
+        Dobre, smaczne i tanie jedzenie w&nbsp;dobrym towarzystwie
+      %p.lead
+        Przez FoodSurfing znajdziesz ludzi, z którymi zjesz coś fajnego, tanio i dobrze.

@@ -1,0 +1,17 @@
+- if meals.size > 0
+  - meals.each do |meal|
+    %div.media.media-meal
+      = link_to meal_path(meal), class: 'pull-left' do
+        - if meal.picture
+          = image_tag meal.picture.url(:tiny)
+        - else
+          = image_tag "Meal"
+
+      %div.media-body
+        %h4.media-heading
+          = link_to meal.name, meal_path(meal)
+
+        %div.info
+          == Porcje: #{meal.portions} x #{meal.price_per_portion} PLN
+        %div.date
+          == Kiedy: #{I18n.l(meal.served_at, format: :short)}

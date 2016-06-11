@@ -1,0 +1,55 @@
+!!!
+%html
+	%head
+		%title
+			FoodSurfing.pl - Dziel się jedzeniem
+		%meta{name: "description", content: "Dobre, smaczne i tanie jedzenie w doborowym towarzystwie" }
+		%meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+
+		%link{rel: "shortcut icon", href: "/favicon.png"}
+		= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+		= javascript_include_tag "application", "data-turbolinks-track" => true
+		= csrf_meta_tags
+		- if content_for? :head
+			= yield :head
+
+		- if content_for? :og
+			= yield :og
+		- else
+			%meta{property: "og:title", content: "FoodSurfing.pl - Jedz smacznie i tanio w dobrym towarzystwie"}
+			%meta{property: "og:description", content: "Dobre, smaczne i tanie jedzenie w doborowym towarzystwie"}
+			%meta{property: "og:url", content: root_url}
+			%meta{property: "og:site_name", content: "FoodSurfing.pl"}
+			%meta{property: "og:type", content: "website"}
+			%meta{property: "og:image", content: asset_url('fb.png')}
+
+
+
+		%script{src: "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.google_api_key}"}
+		- if Rails.env == 'production'
+			= render partial: 'layouts/shared/analytics'
+	%body
+		= render partial: 'layouts/shared/header'
+
+		- if content_for? :map
+			= yield :map
+
+		- if content_for? :fullpage_before
+			= yield :fullpage_before
+		%div.container.page-container
+			= render 'layouts/shared/messages'
+
+			- if content_for? :sidebar
+				%div.row
+					%div.col-md-9
+						= yield
+					%div.col-md-3
+						%div.sidebar
+							= yield :sidebar
+			- else
+				= yield
+
+		- if content_for? :fullpage_after
+			= yield :fullpage_after
+
+		= render partial: 'layouts/shared/footer'

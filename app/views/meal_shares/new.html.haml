@@ -1,0 +1,29 @@
+%div.page-header
+  %h1
+    = @meal.name
+    %small
+      &mdash;
+      potwierdź zamówienie
+
+%div.page-content
+
+  %div.row
+    %div.col-md-6
+      = form_for [@meal, @share] do |f|
+        %div.alert.alert-info
+          %strong Uwaga!
+          Zamierzasz zamówić porcję. Prosimy o potwierdzenie Twojego zamiaru.
+
+
+        %div.form-group
+          = f.label :ordered_portions, "Ile porcji chcesz odebrać"
+          = f.select :ordered_portions, @meal.available_portions, {}, class: 'form-control', placeholder: 'Ile porcji'
+          = f.error_message_on :ordered_portions
+
+        %div.form-group
+          = f.label :comment, "Masz jakiś komentarz?"
+          = f.text_area :comment, class: 'form-control', rows: 3, placeholder: 'Np. uwagi odnośnie odbioru, przypraw itd.'
+          = f.error_message_on :comment
+
+        %fieldset.actions
+          = f.submit "Zamawiam posiłek", class: "btn btn-primary btn-lg"

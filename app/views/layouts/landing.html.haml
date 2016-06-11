@@ -1,0 +1,34 @@
+!!!
+%html
+  %head
+    %title
+      FoodSurfing.pl - Dziel się jedzeniem
+    %meta{name: "description", content: "Dobre, smaczne i tanie jedzenie w doborowym towarzystwie" }
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+
+    %link{rel: "shortcut icon", href: "/favicon.png"}
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    %meta{property: "og:title", content: "FoodSurfing.pl - Jedz smacznie i tanio w dobrym towarzystwie"}
+    %meta{property: "og:description", content: "Dobre, smaczne i tanie jedzenie w doborowym towarzystwie"}
+    %meta{property: "og:url", content: root_url}
+    %meta{property: "og:site_name", content: "FoodSurfing.pl"}
+    %meta{property: "og:type", content: "website"}
+    %meta{property: "og:image", content: asset_url('fb.png')}
+    - if Rails.env == 'production'
+      = render partial: 'layouts/shared/analytics'
+  %body
+
+    %div.container
+      %div.text-center
+        %h1= image_tag 'logo.png', alt: "FoodSurfing.pl", width: 240
+
+
+
+    = yield :fullpage_before if content_for? :fullpage_before
+    %div.landing-wrapper
+      %div.container
+        = yield
+
+    = yield :fullpage_after if content_for? :fullpage_after

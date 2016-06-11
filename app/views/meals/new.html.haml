@@ -1,0 +1,20 @@
+%div.page-header
+  %h1 Dodaj posiłek
+
+
+%div.page-content
+
+  = form_for @meal do |f|
+
+
+    %fieldset
+      = render partial: 'fields', locals: {f: f}
+
+    - unless current_user
+      %fieldset
+        %legend Twoje dane
+        = fields_for @user do |fields|
+          = render partial: 'devise/registrations/fields', locals: {f: fields}
+
+    %fieldset.actions
+      = f.submit "Dodaj posiłek", class: "btn btn-primary btn-large"

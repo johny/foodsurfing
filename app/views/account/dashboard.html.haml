@@ -1,0 +1,11 @@
+%div.page-header
+  %h1 Od kuchni
+
+
+%div.page-content
+
+  = render partial: 'meals/mine'
+
+- content_for :sidebar do
+
+  = render partial: 'account/sidebar'

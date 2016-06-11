@@ -1,0 +1,23 @@
+%div.page-header
+  %h1 Edycja profilu
+
+
+%div.page-content
+
+  = form_for(@user, url: update_account_path, html: { method: :put, multipart: true }) do |f|
+
+    %div.form-group
+      = f.label :name, "Twoje imię"
+      = f.text_field :name, class: 'form-control'
+
+    %div.form-group
+      = f.label :bio, "Krótkie bio"
+      = f.text_area :bio, class: 'form-control'
+
+    %div.form-group
+      = f.label :avatar, "Zdjęcie profilowe"
+      = f.file_field :avatar
+
+
+    %fieldset.actions
+      = f.submit "Zaktualizuj profil", class: "btn btn-primary"

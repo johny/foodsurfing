@@ -1,0 +1,45 @@
+%div.row
+
+  %div.col-md-6
+
+    %div.form-group
+      = f.label :street_address, "Ulica"
+      = f.text_field :street_address, class: 'form-control', placeholder: "Adres pod jakim można odebrać jedzenie"
+      = f.error_message_on :street_address
+
+    %div.form-group
+      = f.label :city, "Miasto"
+      = f.text_field :city, class: 'form-control', value: "Kraków"
+      = f.error_message_on :city
+
+    %div.form-group
+
+      %div#minimap
+
+      = f.hidden_field :latitude, class: 'form-control', placeholder: "Lat"
+      = f.error_message_on :latitude
+      = f.hidden_field :longitude, class: 'form-control', placeholder: "Lng"
+      = f.error_message_on :longitude
+
+
+  %div.col-md-6
+    %div.form-group
+      = f.label :name, "Twoje imię"
+      = f.text_field :name, class: 'form-control'
+      = f.error_message_on :name
+
+    %div.form-group
+      = f.label :email, "Adres email"
+      = f.email_field :email, autocomplete: :off, class: 'form-control'
+      = f.error_message_on :email
+
+    %div.form-group
+      = f.label :password, "Hasło"
+      = f.password_field :password, class: 'form-control'
+      %span.help-block Minimum 8 znakóww
+      = f.error_message_on :password
+
+    %div.form-group
+      = f.label :bio, "Krótkie info o Tobie"
+      = f.text_area :bio, class: 'form-control'
+      = f.error_message_on :bio
